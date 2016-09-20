@@ -4,28 +4,46 @@ __author__ = 'yanxiaoshuang'
 from Tkinter import *
 import ctypes
 import circlebase
+import sys
+
+import sys
+type = sys.getfilesystemencoding()
+reload(sys)
+sys.setdefaultencoding('utf-8')
 RESULT={}
 def Mbox(title,text,style):
     ctypes.windll.user32.MessageBoxA(0,text,title,style)
 def on_click(num,str1,path,name,v1,v):
-    global RESULT
-    n = int(num.get())
-    s = str(str1.get())
-    p = str(path.get())
-    na = str(name.get())
-    RESULT = {'num':n,'string':s,'path':p,'name':na}
-    string = str('Success!!\nSee your result in the file of %s%s.txt'%(p,na))
-    titleb = 'result'
-    Mbox(titleb,string,1)
-    if(v1.get()==0):
-        space = 0
+    num1 = num.get()
+    str2 = str1.get()
+    name1 = name.get()
+
+    if(num1=="" or str2=="" or name1==""):
+        string = '循环个数、基串和文件名是必填项，请重新填写！ '.decode('utf-8').encode(type)
+        titleb = 'result'
+        Mbox(titleb,string,1)
     else:
-        space = 1
-    print(space)
-    if(v.get()==0):
-        sameclick(space)
-    else:
-        diffclick(space)
+        global RESULT
+        n = int(num1.strip())
+        s = str(str2).decode('utf-8').encode(type)
+        p = str(path.get())
+        na = str(name1)
+        RESULT = {'num':n,'string':s,'path':p,'name':na}
+        string = str('Success!!\nSee your result in the file of %s%s.txt'%(p,na))
+        titleb = 'result'
+        Mbox(titleb,string,1)
+        if(v1.get()==0):
+           space = 0
+        else:
+           space = 1
+        print(space)
+        if(v.get()==0):
+           sameclick(space)
+        else:
+           diffclick(space)
+
+
+
     return
 
 def myui():
