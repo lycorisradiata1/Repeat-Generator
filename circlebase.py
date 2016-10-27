@@ -47,7 +47,7 @@ def circlediff(space,num1,str1,name,path = 'd://'):
         fp.write('\n')
     else:
         fp = open(allpath,'a+')
-    strstart = num1+'个：\n'
+    strstart = (str(num1)+'个：\n').decode('utf-8').encode(type)
     fp.write(strstart)
     while(i<num1):
         s+=str(i)
